@@ -7,7 +7,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, confusion_matrix
 
 
-df = pd.read_csv('questions.csv')
+df = pd.read_csv('updated-questions-580.csv')
 print(df.head())
 print(df.shape)
 print(df['Category'].value_counts())
