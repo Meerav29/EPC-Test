@@ -39,3 +39,10 @@ pipeline.fit(X_train, y_train)
 y_pred = pipeline.predict(X_test)
 print("Classification Report:\n", classification_report(y_test, y_pred))
 print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+
+import numpy as np
+errors = X_test[y_test != y_pred]
+preds  = y_pred[y_test != y_pred]
+trues  = y_test[y_test != y_pred]
+for text, true, pred in zip(errors, trues, preds):
+    print(f"True: {true}  ── Pred: {pred}\n  » {text}\n")
