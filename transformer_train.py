@@ -62,16 +62,19 @@ def train_transformer(data_path: str = "updated-questions-580.csv") -> None:
         "distilbert-base-uncased", num_labels=len(data["labels"])
     )
 
-    training_args = TrainingArguments(
-        output_dir="bert-model",
-        evaluation_strategy="epoch",
-        learning_rate=2e-5,
-        per_device_train_batch_size=8,
-        per_device_eval_batch_size=8,
-        num_train_epochs=2,
-        weight_decay=0.01,
-        logging_steps=10,
-    )
+    arg_kwargs = {
+        "output_dir": "bert-model",
+        "learning_rate": 2e-5,
+        "per_device_train_batch_size": 8,
+        "per_device_eval_batch_size": 8,
+        "num_train_epochs": 2,
+        "weight_decay": 0.01,
+        "logging_steps": 10,
+    }
+    if "evaluation_strategy" in TrainingArguments.__init__.__code__.co_varnames:
+        arg_kwargs["evaluation_strategy"] = "epoch"
+
+    training_args = TrainingArguments(**arg_kwargs)
 
     trainer = Trainer(
         model=model,
