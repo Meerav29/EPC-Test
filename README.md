@@ -5,6 +5,12 @@ EPC - testing only.
 
 A new script `transformer_train.py` uses Hugging Face's `transformers` library to train a `DistilBERT` model on the questions dataset. The workflow mirrors `load.py` but leverages a pretrained transformer and `Trainer` for fine-tuning.
 
+`transformer_train.py` depends on PyTorch and Accelerate. Install them with:
+
+```bash
+pip install transformers[torch] 'accelerate>=0.26.0'
+```
+
 Run it with:
 
 ```bash

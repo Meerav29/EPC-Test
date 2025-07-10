@@ -5,6 +5,15 @@ model using Hugging Face ``transformers``. It expects ``pandas``, ``scikit-learn
 ``datasets`` and ``torch`` to be installed.
 """
 
+try:  # Ensure PyTorch and Accelerate are available for Trainer
+    import torch  # noqa: F401
+    import accelerate  # noqa: F401
+except ImportError as e:  # pragma: no cover - simple availability check
+    raise ImportError(
+        "Trainer requires PyTorch and Accelerate. Install them via "
+        "`pip install transformers[torch]` or `pip install 'accelerate>=0.26.0'`."
+    ) from e
+
 import re
 from typing import Dict
 
